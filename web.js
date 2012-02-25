@@ -2,6 +2,22 @@ var express = require('express');
 var ejs = require('ejs');
 var app = express.createServer(express.logger());
 
+var mongoose = require('mongoose'); // include Mongoose MongoDB library
+var schema = mongoose.Schema; 
+
+/************ DATABASE CONFIGURATION **********/
+app.db = mongoose.connect(process.env.MONGOLAB_URI); //connect to the mongolabs database - local server uses .env file
+
+// include the database model / schema
+require('./models').configureSchema(schema, mongoose);
+
+// Define your DB Model variables
+var Meme = mongoose.model('Meme');
+
+/************* END DATABASE CONFIGURATION *********/
+
+
+
 /*********** SERVER CONFIGURATION *****************/
 app.configure(function() {
     
@@ -39,18 +55,18 @@ app.configure(function() {
 /*********** END SERVER CONFIGURATION *****************/
 
 
-valentineImages = ['fry.png','cat.jpg','andy.jpg'];
+memeImages = ['fry.png','cat.jpg','andy.jpg'];
 
-cardArray = []; // this array will hold card data from forms
+memeArray = []; // this array will hold card data from forms
 
 app.get('/', function(request, response) {
     var templateData = { 
         pageTitle : 'MEMEMAKER',
         message: 'MAKE YR MEME',
-        images: valentineImages
+        images: memeImages
     };
     
-    response.render("card_form.html",templateData);
+    response.render("meme_form.html",templateData);
 });
 
 app.post('/', function(request, response){
@@ -59,35 +75,42 @@ app.post('/', function(request, response){
     console.log(request.body);
     
     // Simple data object to hold the form data
-    newCard = {
-        to : request.body.to,
-        from : request.body.from,
+    var memeData = {
+        line1 : request.body.line1,
+        line2 : request.body.line2,
         image : request.body.image
     };
     
-    // Put this newCard object into the cardArray
-    cardArray.push(newCard);
     
-    // Get the position of the card in the cardArray
-    cardNumber = cardArray.length - 1;
+    var meme = new Meme(memeData);
     
-    response.redirect('/card/' + cardNumber);
+    meme.save();
+    
+    memeNumber = memeArray.length - 1;
+    
+    response.redirect('/meme/' + memeNumber);
+    
 });
 
 
-app.get('/card/:cardNumber', function(request, response){
+app.get('/meme/:memeNumber', function(request, response){
     
-    // Get the card from cardArray
-    cardData = cardArray[request.params.cardNumber]
+Meme.findOne({memeNumber:request.params.memeNumber},function(err,post){
+
+if (err) {
+   console.log('error');
+   console.log(err);
+   response.send("Sorry, yr meme was not found!");
+   }
     
-    if (cardData != undefined) {
+    if (memeData != undefined) {
         
         // Render the card_display template - pass in the cardData
-        response.render("card_display.html", cardData);
+        response.render("meme_display.html", memeData);
         
     } else {
         // card not found. show the 'Card not found' template
-        response.render("card_not_found.html");
+        response.render("meme_not_found.html");
         
     }
     

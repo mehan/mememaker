@@ -12,7 +12,7 @@ app.db = mongoose.connect(process.env.MONGOLAB_URI); //connect to the mongolabs 
 require('./models').configureSchema(schema, mongoose);
 
 // Define your DB Model variables
-var Memes = mongoose.model('Memes');
+var Meme = mongoose.model('Meme');
 
 /************* END DATABASE CONFIGURATION *********/
 
@@ -83,7 +83,7 @@ app.post('/', function(request, response){
     };
     
     
-    var meme = new Memes(memeData);
+    var meme = new Meme(memeData);
     
     meme.save();
     

@@ -87,7 +87,7 @@ app.post('/', function(request, response){
     
     meme.save();
     
-    memeNumber = memeArray.length - 1;
+    memeNumber = memeArray.length;
     
     response.redirect('/meme/' + memeNumber);
     

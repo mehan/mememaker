@@ -96,28 +96,28 @@ app.post('/', function(request, response){
 
 app.get('/meme/:memeNumber', function(request, response){
     
-Meme.findOne({memeNumber:request.params.memeNumber},function(err,post){
-
-if (err) {
-   console.log('error');
-   console.log(err);
-   response.send("Sorry, yr meme was not found!"); }
-    
-    if (memeData != undefined) {
-        
-        // Render the card_display template - pass in the cardData
-        response.render("meme_display.html", memeData); } 
-    
-    else {
-        // card not found. show the 'Card not found' template
-        response.render("meme_not_found.html");}
-        
-    });
-    
+	Meme.findOne({memeNumber:request.params.memeNumber},function(err,post){
+	
+		if (err) {
+		   console.log('error');
+		   console.log(err);
+		   response.send("Sorry, yr meme was not found!");
+		}
+			
+		if (memeData != undefined) {
+			
+			// Render the card_display template - pass in the cardData
+			response.render("meme_display.html", memeData); } 
+		
+		else {
+			// card not found. show the 'Card not found' template
+			response.render("meme_not_found.html");}
+			
+		});
+		
+	});
+	
 });
-
-
-
 
 
 // Make server turn on and listen at defined PORT (or port 3000 if is not defined)

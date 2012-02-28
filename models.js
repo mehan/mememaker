@@ -3,9 +3,9 @@ module.exports.configureSchema = function(Schema, mongoose) {
     
     
     Memes = new Schema({
-      line1 : request.body.line1,
-        line2 : request.body.line2,
-        image : request.body.image
+      line1 : String,
+        line2 : String,
+        image : String
     });
     
     // add schemas to Mongoose

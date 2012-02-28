@@ -57,7 +57,7 @@ app.configure(function() {
 
 memeImages = ['fry.png','cat.jpg','andy.jpg'];
 
-memeArray = []; // this array will hold card data from forms
+memeArray = []; // this array will hold meme data from forms
 
 app.get('/', function(request, response) {
     var templateData = { 
@@ -110,7 +110,7 @@ if (err) {
         
     } else {
         // card not found. show the 'Card not found' template
-        response.render("meme_not_found.html");
+        response.render("meme_not_found.html");}
         
     }
     

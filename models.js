@@ -2,13 +2,13 @@
 module.exports.configureSchema = function(Schema, mongoose) {
     
     
-    Memes = new Schema({
+    Meme = new Schema({
       line1 : String,
         line2 : String,
         image : String
     });
     
     // add schemas to Mongoose
-    mongoose.model('Meme', Memes);
+    mongoose.model('Meme', Meme);
    
 };

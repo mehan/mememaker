@@ -12,7 +12,7 @@ app.db = mongoose.connect(process.env.MONGOLAB_URI); //connect to the mongolabs 
 require('./models').configureSchema(schema, mongoose);
 
 // Define your DB Model variables
-var Meme = mongoose.model('Meme');
+var Memes = mongoose.model('Memes');
 
 /************* END DATABASE CONFIGURATION *********/
 
@@ -69,6 +69,7 @@ app.get('/', function(request, response) {
     response.render("meme_form.html",templateData);
 });
 
+
 app.post('/', function(request, response){
     console.log("Inside app.post('/')");
     console.log("form received and includes")
@@ -82,7 +83,7 @@ app.post('/', function(request, response){
     };
     
     
-    var meme = new Meme(memeData);
+    var meme = new Memes(memeData);
     
     meme.save();
     
@@ -95,7 +96,7 @@ app.post('/', function(request, response){
 
 app.get('/meme/:memeNumber', function(request, response){
     
-Meme.findOne({memeNumber:request.params.memeNumber},function(err,post){
+Memes.findOne({memeNumber:request.params.memeNumber},function(err,post){
 
 if (err) {
    console.log('error');

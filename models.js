@@ -9,6 +9,6 @@ module.exports.configureSchema = function(Schema, mongoose) {
     });
     
     // add schemas to Mongoose
-    mongoose.model('Meme', Meme);
+    mongoose.model('Memes', Memes);
    
 };

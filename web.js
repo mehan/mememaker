@@ -96,7 +96,7 @@ app.post('/', function(request, response){
 
 app.get('/meme/:memeNumber', function(request, response){
     
-Memes.findOne({memeNumber:request.params.memeNumber},function(err,post){
+Meme.findOne({memeNumber:request.params.memeNumber},function(err,post){
 
 if (err) {
    console.log('error');

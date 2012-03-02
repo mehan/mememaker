@@ -57,7 +57,7 @@ app.configure(function() {
 
 memeImages = ['fry.png','cat.jpg','andy.jpg'];
 
-memeArray = []; // this array will hold meme data from forms
+memeCounter = 0;
 
 app.get('/', function(request, response) {
     var templateData = { 
@@ -69,6 +69,7 @@ app.get('/', function(request, response) {
     response.render("meme_form.html",templateData);
 });
 
+memeCounter++;
 
 app.post('/', function(request, response){
     console.log("Inside app.post('/')");
@@ -79,7 +80,8 @@ app.post('/', function(request, response){
     var memeData = {
         line1 : request.body.line1,
         line2 : request.body.line2,
-        image : request.body.image
+        image : request.body.image,
+        memeNumber: memeCounter,
     };
     
     
@@ -87,7 +89,7 @@ app.post('/', function(request, response){
     
     meme.save();
     
-    memeNumber = memeArray.length;
+    
     
     response.redirect('/meme/' + memeNumber);
     
@@ -112,8 +114,6 @@ app.get('/meme/:memeNumber', function(request, response){
 		else {
 			// card not found. show the 'Card not found' template
 			response.render("meme_not_found.html");}
-			
-	//	});
 		
 	});
 	

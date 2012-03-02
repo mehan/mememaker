@@ -113,7 +113,7 @@ app.get('/meme/:memeNumber', function(request, response){
 			// card not found. show the 'Card not found' template
 			response.render("meme_not_found.html");}
 			
-		});
+	//	});
 		
 	});
 	

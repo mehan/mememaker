@@ -54,6 +54,14 @@ app.configure(function() {
 });
 /*********** END SERVER CONFIGURATION *****************/
 
+ function convertToSlug(Text)
+        {
+            return Text
+                .toLowerCase()
+                .replace(/[^\w ]+/g,'')
+                .replace(/ +/g,'-')
+                ;
+        }
 
 memeImages = ['fry.png','cat.jpg','andy.jpg'];
 
@@ -68,15 +76,6 @@ app.get('/', function(request, response) {
     response.render("meme_form.html",templateData);
 });
 
- function convertToSlug(Text)
-        {
-            return Text
-                .toLowerCase()
-                .replace(/[^\w ]+/g,'')
-                .replace(/ +/g,'-')
-                ;
-        }
-                
 
 
 app.post('/', function(request, response){
@@ -84,12 +83,15 @@ app.post('/', function(request, response){
     console.log("form received and includes")
     console.log(request.body);
     
+newSlug = convertToSlug(request.body.line1+request.body.line2);    
+    
+    
     // Simple data object to hold the form data
     var memeData = {
         line1 : request.body.line1,
         line2 : request.body.line2,
         image : request.body.image,
-        urlslug: convertToSlug(request.body.line1+request.body.line2),
+        urlslug: newSlug,
     };
     
     

@@ -108,7 +108,7 @@ newSlug = convertToSlug(request.body.line1+request.body.line2);
 
 app.get('/meme/:urlslug', function(request, response){
     
-	Meme.findOne({urlslug:request.params.urlslug},function(err,post){
+	Meme.findOne({urlslug:request.params.urlslug},function(err, memeData){
 	
 		if (err) {
 		   console.log('error');
@@ -116,7 +116,7 @@ app.get('/meme/:urlslug', function(request, response){
 		   response.send("Sorry, yr meme was not found!");
 		}
 			
-		if (urlslug != undefined) {
+		if (memeData.urlslug != undefined) {
 			
 			// Render the card_display template - pass in the cardData
 			response.render("meme_display.html", memeData); } 

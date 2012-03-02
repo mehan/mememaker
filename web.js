@@ -83,7 +83,7 @@ app.post('/', function(request, response){
     console.log("form received and includes")
     console.log(request.body);
     
-newSlug = convertToSlug(request.body.line1+request.body.line2);    
+newSlug = convertToSlug(request.body.line1+request.body.line2+request.body.image);    
     
     
     // Simple data object to hold the form data

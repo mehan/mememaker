@@ -57,7 +57,6 @@ app.configure(function() {
 
 memeImages = ['fry.png','cat.jpg','andy.jpg'];
 
-memeNumber = 0;
 
 app.get('/', function(request, response) {
     var templateData = { 
@@ -69,7 +68,16 @@ app.get('/', function(request, response) {
     response.render("meme_form.html",templateData);
 });
 
-memeNumber++;
+ function convertToSlug(Text)
+        {
+            return Text
+                .toLowerCase()
+                .replace(/[^\w ]+/g,'')
+                .replace(/ +/g,'-')
+                ;
+        }
+                
+
 
 app.post('/', function(request, response){
     console.log("Inside app.post('/')");
@@ -81,7 +89,7 @@ app.post('/', function(request, response){
         line1 : request.body.line1,
         line2 : request.body.line2,
         image : request.body.image,
-        memeNumber: memeNumber,
+        urlslug: convertToSlug(request.body.line1+request.body.line2),
     };
     
     
@@ -91,14 +99,14 @@ app.post('/', function(request, response){
     
     
     
-    response.redirect('/meme/' + memeNumber);
+    response.redirect('/meme/' + urlslug);
     
 });
 
 
-app.get('/meme/:memeNumber', function(request, response){
+app.get('/meme/:urlslug', function(request, response){
     
-	Meme.findOne({memeNumber:request.params.memeNumber},function(err,post){
+	Meme.findOne({urlslug:request.params.urlslug},function(err,post){
 	
 		if (err) {
 		   console.log('error');
@@ -106,7 +114,7 @@ app.get('/meme/:memeNumber', function(request, response){
 		   response.send("Sorry, yr meme was not found!");
 		}
 			
-		if (memeData != undefined) {
+		if (urlslug != undefined) {
 			
 			// Render the card_display template - pass in the cardData
 			response.render("meme_display.html", memeData); } 

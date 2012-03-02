@@ -6,7 +6,7 @@ module.exports.configureSchema = function(Schema, mongoose) {
       line1 : String,
         line2 : String,
         image : String,
-        memeNumber : Number,
+        urlslug : String,
         
         });
     

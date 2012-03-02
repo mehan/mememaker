@@ -57,7 +57,7 @@ app.configure(function() {
 
 memeImages = ['fry.png','cat.jpg','andy.jpg'];
 
-memeCounter = 0;
+memeNumber = 0;
 
 app.get('/', function(request, response) {
     var templateData = { 
@@ -69,7 +69,7 @@ app.get('/', function(request, response) {
     response.render("meme_form.html",templateData);
 });
 
-memeCounter++;
+memeNumber++;
 
 app.post('/', function(request, response){
     console.log("Inside app.post('/')");
@@ -81,7 +81,7 @@ app.post('/', function(request, response){
         line1 : request.body.line1,
         line2 : request.body.line2,
         image : request.body.image,
-        memeNumber: memeCounter,
+        memeNumber: memeNumber,
     };
     
     

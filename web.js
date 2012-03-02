@@ -101,7 +101,7 @@ newSlug = convertToSlug(request.body.line1+request.body.line2);
     
     
     
-    response.redirect('/meme/' + urlslug);
+    response.redirect('/meme/' + memeData.urlslug);
     
 });
 

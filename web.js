@@ -63,12 +63,12 @@ app.configure(function() {
                 ;
         }
 
-memeImages = ['fry.png','cat.jpg','andy.jpg'];
+memeImages = ['andy.jpg', 'lars.jpg', 'garrett.jpg', 'cole.jpg', 'orr.jpg'];
 
 
 app.get('/', function(request, response) {
     var templateData = { 
-        pageTitle : 'MEMEMAKER',
+        pageTitle : 'MEMEMAKER 2.0',
         message: 'MAKE YR MEME',
         images: memeImages
     };

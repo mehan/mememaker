@@ -72,10 +72,14 @@ textarea#message {
     text-align:center;
 }
 
+#overflow_container {
+overflow: hidden;
+
+}
+
 #meme1 {
 position:absolute; 
 top:120px; 
-left:230px; 
 width:600px; 
 height:50px;
 }
@@ -83,9 +87,14 @@ height:50px;
 #meme2 {
 position:absolute; 
 top:450px; 
-left:230px; 
 width:600px; 
 height:50px;
+}
+
+#photos {
+
+padding:10px 0px 0px 0px;
+
 }
 
 .centered {

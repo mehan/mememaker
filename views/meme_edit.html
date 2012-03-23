@@ -1,0 +1,44 @@
+<div class="row">
+    <div class="span12">
+        <form method="POST" action="/">
+    
+            <div class="row">
+                <div class="span4 offset2">
+                    <label for="line1">Line 1:</label>
+                    <input type="text" name="line1" id="from" size="40">
+                </div>
+                <div class="span4 offset1">
+                    <label for="line2">Line 2:</label>
+                    <input type="text" name="line2" id="from" size="40">
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="span10 offset2">
+                    <br/>
+                    <label for="image">Pick an image:</label>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span1">&nbsp;</div>
+                
+              <% for(i=0; i<images.length; i++) { %>
+                <div class="span2" id="photos">
+                    <input type="radio" name="image" value="<%= images[i] %>">
+                    <img src="/img/<%= images[i] %>" alt="<%= images[i] %>">
+                </div>
+                <% } %>
+                
+            </div>
+            
+            <div class="row">
+                <div class="offset4 span4">
+                    <br/><br/>
+                    <input type="submit" class="span4 btn-info" value="Save your meme!" />
+                    
+                </div>
+            </div>
+
+        </form>
+    </div>
+</div>
